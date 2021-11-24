@@ -1,9 +1,10 @@
-const { getTest, postTest } = require("../controller/userController")
+const { updateUser } = require("../controller/userController")
+const { verifyTokenAndAuthorization } = require("../middleware/verifyToken")
 
 const router = require("express").Router()
 
 
-router.get('/usertest', getTest)
-router.post('/posttest',postTest)
+router.put("/:id",verifyTokenAndAuthorization, updateUser)
+
 
 module.exports = router
