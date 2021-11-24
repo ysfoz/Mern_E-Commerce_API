@@ -1,5 +1,7 @@
 const Cart = require("../models/Cart");
 
+
+
 exports.createCart = async (req, res) => {
   const cart = new Cart(req.body);
   try {
@@ -10,9 +12,9 @@ exports.createCart = async (req, res) => {
   }
 };
 
-exports.updataCart = async (req, res) => {
+exports.updateCart = async (req, res) => {
   try {
-    const updetedCart = await Cart.findByIdAndUpdate(
+    const updatedCart = await Cart.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
