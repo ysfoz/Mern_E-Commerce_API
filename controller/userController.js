@@ -22,3 +22,25 @@ exports.updateUser = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+exports.deleteUser = async(req,res) => {
+ try {
+   await UserModel.findByIdAndDelete(req.params.id)
+   res.status(200).json("User has been deleted . . .")
+ } catch (error) {
+   res.status(500).json(error)
+ }
+ 
+  
+}
+exports.getUser = async(req,res) => {
+  try {
+    const user = await UserModel.findById(req.params.id);
+    const { password, ...others } = user._doc;
+    res.status(200).json(others);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+ 
+  
+}

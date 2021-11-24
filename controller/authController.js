@@ -14,7 +14,8 @@ exports.userRegister = async (req, res) => {
 
   try {
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    const { password, ...others} = savedUser._doc
+    res.status(201).json(others);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -32,9 +33,9 @@ exports.userLogin = async (req, res) => {
 
     Orginalpassword !== req.body.password && res.status(401).json("Wrong creditials!");
 
-    jwtToken = jwt.sign({id:user._id,isLogin:user.isLogin}, process.env.JWT_SECRET_KEY,{expiresIn:"3d"})
+    jwtToken = jwt.sign({id:user._id,isAdmin:user.isAdmin}, process.env.JWT_SECRET_KEY,{expiresIn:"3d"})
 
-    const { pasword, ...others } = user._doc
+    const { password, ...others } = user._doc
 
     res.status(200).json({...others,jwtToken});
   } catch (error) {
