@@ -8,3 +8,5 @@ router.put("/:id", verifyTokenAndAuthorization,updateCart)
 router.delete("/:id", verifyTokenAndAuthorization, deleteCart)
 router.get("find/:userId",verifyTokenAndAuthorization, getCart)
 router.get("/",verifyTokenAndAuthorization, getAllCarts)
+
+module.exports = router

@@ -6,7 +6,7 @@ exports.createCart = async (req, res) => {
   const cart = new Cart(req.body);
   try {
     const savedCart = await cart.save();
-    res.status(200).json(savedcart);
+    res.status(200).json(savedCart);
   } catch (error) {
     res.status(500).json(error);
   }
