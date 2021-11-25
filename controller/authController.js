@@ -1,6 +1,6 @@
 const UserModel = require("../models/User");
 const CryptoJS = require("crypto-js");
-const jwt =require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 exports.userRegister = async (req, res) => {
   const newUser = new UserModel({
@@ -14,7 +14,7 @@ exports.userRegister = async (req, res) => {
 
   try {
     const savedUser = await newUser.save();
-    const { password, ...others} = savedUser._doc
+    const { password, ...others } = savedUser._doc;
     res.status(201).json(others);
   } catch (error) {
     res.status(500).json(error);
@@ -31,13 +31,18 @@ exports.userLogin = async (req, res) => {
     );
     const Orginalpassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-    Orginalpassword !== req.body.password && res.status(401).json("Wrong creditials!");
+    Orginalpassword !== req.body.password &&
+      res.status(401).json("Wrong creditials!");
 
-    jwtToken = jwt.sign({id:user._id,isAdmin:user.isAdmin}, process.env.JWT_SECRET_KEY,{expiresIn:"3d"})
+    jwtToken = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "3d" }
+    );
 
-    const { password, ...others } = user._doc
+    const { password, ...others } = user._doc;
 
-    res.status(200).json({...others,jwtToken});
+    res.status(200).json({ ...others, jwtToken });
   } catch (error) {
     res.status(500).json(error);
   }

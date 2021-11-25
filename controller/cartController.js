@@ -1,7 +1,5 @@
 const Cart = require("../models/Cart");
 
-
-
 exports.createCart = async (req, res) => {
   const cart = new Cart(req.body);
   try {
@@ -27,30 +25,29 @@ exports.updateCart = async (req, res) => {
   }
 };
 
-exports.deleteCart = async(req,res) => {
-    try {
-        await Cart.findByIdAndDelete(req.params.id)
-        res.status(200).json("Cart has been deleted")
-    } catch (error) {
-        res.status(500).json(error)
-    }
-}
+exports.deleteCart = async (req, res) => {
+  try {
+    await Cart.findByIdAndDelete(req.params.id);
+    res.status(200).json("Cart has been deleted");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
-exports.getCart = async(req,res) => {
-    try {
-        const cart = await Cart.findOne({ userId : req.params.userId})
-        res.status(200).json(cart)
-        
-    } catch (error) {
-        res.status(500).json(error)
-    }
-}
+exports.getCart = async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ userId: req.params.userId });
+    res.status(200).json(cart);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
-exports.getAllCarts = async(req,res) => {
-    try {
-        const allCarts = await Cart.find()
-        res.status(200).json(allCarts)
-    } catch (error) {
-        res.status(500).json(error)
-    }
-}
+exports.getAllCarts = async (req, res) => {
+  try {
+    const allCarts = await Cart.find();
+    res.status(200).json(allCarts);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
