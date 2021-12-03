@@ -1,13 +1,18 @@
-const stripe = require("stripe")(process.env.STRIPE_KEY);
 
-exports.makePayment = (req, res) => {
-  stripe.charges.create(
+const KEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY
+
+const stripe = require("stripe")(KEY)
+
+exports.makePayment = async(req, res) => {
+  await stripe.charges.create(
     {
-      source: req.body.tokenId,
-      amount: req.body.amount,
+      source: req?.body?.tokenId,
+      amount: req?.body?.amount,
       currency: "usd",
     },
+    
     (stripeErr, stripeRes) => {
+ 
       if (stripeErr) {
         res.status(500).json(stripeErr);
       } else {
@@ -15,4 +20,4 @@ exports.makePayment = (req, res) => {
       }
     }
   );
-};
+}
