@@ -13,7 +13,12 @@ exports.updateUser = async (req, res) => {
     const updatedUser = await UserModel.findByIdAndUpdate(
       req.params.id,
       {
-        $set: req.body,
+        $set: {
+          username: req.body.username,
+          email:req.body.email,
+          password:req.body.password,
+          img:req.body.img,
+        },
       },
       { new: true }
     );
