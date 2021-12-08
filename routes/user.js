@@ -13,7 +13,8 @@ const {
 const router = require("express").Router();
 
 router.put("/:id", verifyTokenAndAuthorization, updateUser);
-router.delete("/:id", verifyTokenAndAuthorization || verifyTokenAndAdmin , deleteUser);
+router.delete("/:id", verifyTokenAndAuthorization , deleteUser);
+router.delete("/:id", verifyTokenAndAdmin, deleteUser);
 router.get("/find/:id", verifyTokenAndAdmin, getUser);
 router.get("/", verifyTokenAndAdmin, getAllUser);
 router.get("/stats", verifyTokenAndAdmin, getStats);
