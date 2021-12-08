@@ -52,8 +52,8 @@ exports.getAllUser = async (req, res) => {
     const users = query
       ? await UserModel.find().sort({ _id: -1 }).limit(5)
       : await UserModel.find();
-      const { password, ...others } = users._doc;
-    res.status(200).json(others);
+
+    res.status(200).json(users);
   } catch (err) {
     res.status(500).json(err);
   }
