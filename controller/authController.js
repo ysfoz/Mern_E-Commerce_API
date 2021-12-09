@@ -6,10 +6,25 @@ exports.userRegister = async (req, res) => {
   const newUser = new UserModel({
     username: req.body.username,
     email: req.body.email,
+    img:req.body.img,
     password: CryptoJS.AES.encrypt(
       req.body.password,
       process.env.PASS_SECRET_KEY.toString()
     ),
+    
+  });
+
+exports.userAdminRegister = async (req, res) => {
+  const newUser = new UserModel({
+    username: req.body.username,
+    email: req.body.email,
+    img:req.body.img,
+    isAdmin:req.body.isAdmin,
+    password: CryptoJS.AES.encrypt(
+      req.body.password,
+      process.env.PASS_SECRET_KEY.toString()
+    ),
+    
   });
 
   try {
