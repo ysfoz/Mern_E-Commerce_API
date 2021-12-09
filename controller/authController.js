@@ -6,13 +6,21 @@ exports.userRegister = async (req, res) => {
   const newUser = new UserModel({
     username: req.body.username,
     email: req.body.email,
-    img:req.body.img,
     password: CryptoJS.AES.encrypt(
       req.body.password,
       process.env.PASS_SECRET_KEY.toString()
     ),
-    
   });
+
+  try {
+    const savedUser = await newUser.save();
+    const { password, ...others } = savedUser._doc;
+    res.status(201).json(others);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 
 exports.userAdminRegister = async (req, res) => {
   const newUser = new UserModel({
@@ -24,7 +32,6 @@ exports.userAdminRegister = async (req, res) => {
       req.body.password,
       process.env.PASS_SECRET_KEY.toString()
     ),
-    
   });
 
   try {
@@ -35,6 +42,10 @@ exports.userAdminRegister = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+
+
+
 
 exports.userLogin = async (req, res) => {
   try {
