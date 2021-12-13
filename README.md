@@ -1,5 +1,18 @@
 # Mern_E-Commerce_API
 
+# Links
+
+[Client Admin Panel  Heroku Link](https://react-shop-admin.herokuapp.com/login)
+<br>
+username = admin
+<br>
+pass = 123456 
+
+[Api Heroku Link](https://mern-e-commerce-api.herokuapp.com/)
+<br>
+[Client Admin Panel Github Link](https://github.com/ysfoz/Mern_E-Commerce_AdminPanel)
+
+
 # Routes
 
 ## /api/users
