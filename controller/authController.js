@@ -6,6 +6,7 @@ exports.userRegister = async (req, res) => {
   const newUser = new UserModel({
     username: req.body.username,
     email: req.body.email,
+    img:req.body.img,
     password: CryptoJS.AES.encrypt(
       req.body.password,
       process.env.PASS_SECRET_KEY.toString()
