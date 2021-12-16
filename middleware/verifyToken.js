@@ -20,7 +20,7 @@ exports.verifyToken = (req, res, next) => {
 
 exports.verifyTokenAndAuthorization = (req, res, next) => {
   this.verifyToken(req, res, () => {
-    if (req.user.id === req.params.id || req.user.isAdmin) {
+    if (req.user.id === req.params.id ) {
       next();
     } else {
       res.status(403).json("You are not allowed to do that!!");
