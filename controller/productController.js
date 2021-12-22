@@ -30,7 +30,7 @@ exports.updateSalesAmount = async (req, res) => {
       req.body.id,
       {
         $set:{
-          salesAmount = req.body.salesAmount
+          salesAmount : req.body.salesAmount,
             },
       },
       { new: true }
