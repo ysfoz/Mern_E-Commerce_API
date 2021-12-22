@@ -24,24 +24,6 @@ exports.updateProduct = async (req, res) => {
     res.status(500).json(error);
   }
 };
-exports.updateSalesAmount = async (req, res) => {
-  try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.body.id,
-      {
-        $set:{
-          salesAmount : req.body.salesAmount,
-            },
-      },
-      { new: true }
-      
-    );
-    res.status(200).json(updatedProduct);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
 
 exports.deleteProduct = async (req, res) => {
   try {
