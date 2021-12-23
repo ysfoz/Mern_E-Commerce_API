@@ -21,3 +21,9 @@ exports.makePayment = async(req, res) => {
     }
   );
 }
+
+exports.refundPayment = async(req, res) =>{
+ await stripe.refunds.create({
+  charge: req.body,
+})
+}
