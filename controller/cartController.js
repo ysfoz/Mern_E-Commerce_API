@@ -15,9 +15,9 @@ exports.updateCart = async (req, res) => {
     const updatedCart = await Cart.findOneAndUpdate(
       {userId :req.params.userId},
       {
-        $set: req.body,
+        $push: {"products":req.body},
       },
-      { upsert:true }
+      { upsert:true, new: true }
     );
     res.status(200).json(updatedCart);
   } catch (error) {
