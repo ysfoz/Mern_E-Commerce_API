@@ -12,12 +12,12 @@ exports.createCart = async (req, res) => {
 
 exports.updateCart = async (req, res) => {
   try {
-    const updatedCart = await Cart.findByIdAndUpdate(
-      {userId :req.params.id},
+    const updatedCart = await Cart.findOneAndUpdate(
+      {userId :req.params.userId},
       {
         $set: req.body,
       },
-      { new: true,upsert:true }
+      { upsert:true,new: true }
     );
     res.status(200).json(updatedCart);
   } catch (error) {
