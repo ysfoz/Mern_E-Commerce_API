@@ -17,7 +17,7 @@ exports.updateCart = async (req, res) => {
       {
         $set: req.body,
       },
-      { upsert:true,new: true }
+      { upsert:true }
     );
     res.status(200).json(updatedCart);
   } catch (error) {
