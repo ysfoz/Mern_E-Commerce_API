@@ -55,6 +55,20 @@ exports.deleteCart = async (req, res) => {
   }
 };
 
+exports.deleteProductfromCart = async(req,res)=>{
+  try {
+    await Cart.findOneAndUpdate(
+      {userId: req.params.id},
+      {
+        $pull:{products:{_id:req.body.id}}
+      }
+      )
+      res.status(200).json("A product has been deleted from your cart")
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}
+
 exports.getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });
