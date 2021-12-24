@@ -10,11 +10,13 @@ const {
   deleteCart,
   getCart,
   getAllCarts,
-  deleteProductfromCart
+  deleteProductfromCart,
+  createOrUpdateCart
 } = require("../controller/cartController");
 
 router.post("/", verifyToken, createCart);
-router.post("/:id", verifyTokenAndAuthorization, updateCart);
+router.post("/:id", verifyTokenAndAuthorization, createOrUpdateCart);
+router.put("/:id", verifyTokenAndAuthorization, updateCart);
 router.post("/delete/:id", verifyTokenAndAuthorization, deleteProductfromCart);
 router.delete("/:id", verifyTokenAndAuthorization, deleteCart);
 router.get("/find/:userId", verifyTokenAndAuthorization, getCart);

@@ -1,5 +1,7 @@
 const Cart = require("../models/Cart");
 
+
+// not used
 exports.createCart = async (req, res) => {
   const cart = new Cart(req.body);
   try {
@@ -10,19 +12,9 @@ exports.createCart = async (req, res) => {
   }
 };
 
-exports.updateCart = async (req, res) => {
-  // try {
-  //   const updatedCart = await Cart.findOneAndUpdate(
-  //     {userId : req.params.userId},
-  //     {
-  //       $setOnInsert:{"userId":req.params},
-  //       $push: {"products":req.body}
-
-  //     },
-  //     { new: true, upsert:true }
-  //   );
-  //   res.status(200).json(updatedCart);
-  // }
+// create or update +
+exports.createOrUpdateCart = async (req, res) => {
+  
   try {
     const cart = await Cart.findOne({ userId: req.params.id});
     if (!cart) {
@@ -46,6 +38,23 @@ exports.updateCart = async (req, res) => {
   }
 };
 
+exports.updateCart= async(req,res)=>{
+try {
+  const product = await Cart.updateOne({userId: req.params.id,"products._id":req.body.id},
+    {
+    $set:{'products.$.quantity' : req.body.quantity}
+    }
+  )
+    res.status(200).json(product)
+} catch (error) {
+  res.status(500).json(error);
+}
+}
+
+
+
+
+// delete cart - all cart - not used
 exports.deleteCart = async (req, res) => {
   try {
     await Cart.findByIdAndDelete(req.params.id);
@@ -55,6 +64,8 @@ exports.deleteCart = async (req, res) => {
   }
 };
 
+
+// delete one product from cart +
 exports.deleteProductfromCart = async(req,res)=>{
   try {
     await Cart.findOneAndUpdate(
