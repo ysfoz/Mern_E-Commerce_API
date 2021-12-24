@@ -11,15 +11,36 @@ exports.createCart = async (req, res) => {
 };
 
 exports.updateCart = async (req, res) => {
+  // try {
+  //   const updatedCart = await Cart.findOneAndUpdate(
+  //     {userId : req.params.userId},
+  //     {
+  //       $setOnInsert:{"userId":req.params},
+  //       $push: {"products":req.body}
+
+  //     },
+  //     { new: true, upsert:true }
+  //   );
+  //   res.status(200).json(updatedCart);
+  // }
   try {
-    const updatedCart = await Cart.findOneAndUpdate(
-      {userId :req.params.userId},
-      {
-        $push: {"products":req.body},
-      },
-      { upsert:true, new: true }
-    );
-    res.status(200).json(updatedCart);
+    const cart = await Cart.findOne({ userId: req.params.id});
+    if (!cart) {
+      const cart = new Cart({products:req.body,userId:req.params.id});
+      
+      const savedCart = await cart.save();
+      res.status(201).json(savedCart);
+    } else {
+      const updatedCart = await Cart.findOneAndUpdate(
+        { userId: req.params.id },
+        {
+          $push: { products: req.body },
+        },
+        { new: true }
+      );
+      
+      res.status(200).json(updatedCart);
+    }
   } catch (error) {
     res.status(500).json(error);
   }
