@@ -6,17 +6,18 @@ const {
 
 const {
   createCart,
-  updateCart,
+  updateProductInCart,
   deleteCart,
   getCart,
   getAllCarts,
   deleteProductfromCart,
-  createOrUpdateCart
+  createOrUpdateCart,
+  
 } = require("../controller/cartController");
 
 router.post("/", verifyToken, createCart);
 router.post("/:id", verifyTokenAndAuthorization, createOrUpdateCart);
-router.put("/:id", verifyTokenAndAuthorization, updateCart);
+router.put("/:id", verifyTokenAndAuthorization, updateProductInCart);
 router.post("/delete/:id", verifyTokenAndAuthorization, deleteProductfromCart);
 router.delete("/:id", verifyTokenAndAuthorization, deleteCart);
 router.get("/find/:userId", verifyTokenAndAuthorization, getCart);

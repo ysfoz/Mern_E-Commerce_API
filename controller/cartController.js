@@ -38,11 +38,13 @@ exports.createOrUpdateCart = async (req, res) => {
   }
 };
 
-exports.updateCart= async(req,res)=>{
+
+// update product quantity and saveforlater
+exports.updateProductInCart= async(req,res)=>{
 try {
   const product = await Cart.updateOne({userId: req.params.id,"products._id":req.body.id},
     {
-    $set:{'products.$.quantity' : req.body.quantity}
+    $set:{'products.$.quantity' : req.body.quantity, 'products.$.saveForLater' : req.body.saveForLater}
     }
   )
     res.status(200).json(product)
@@ -50,7 +52,6 @@ try {
   res.status(500).json(error);
 }
 }
-
 
 
 
