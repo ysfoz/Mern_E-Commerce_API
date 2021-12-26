@@ -58,7 +58,7 @@ try {
 // delete cart - all cart 
 exports.deleteCart = async (req, res) => {
   try {
-    await Cart.findByIdAndDelete({ userId: req.params.userId });
+    await Cart.findOneAndDelete({ userId: req.params.id });
     res.status(200).json("Cart has been deleted");
   } catch (error) {
     res.status(500).json(error);
