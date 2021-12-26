@@ -27,10 +27,10 @@ exports.updateProduct = async (req, res) => {
 exports.updateSalesAmount = async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
+      req.body.id,
       {
-        $set:{
-          salesAmount : req.body.salesAmount,
+        $inc:{
+          salesAmount :  1,
             },
       },
       { new: true }
