@@ -26,8 +26,8 @@ exports.updateProduct = async (req, res) => {
 };
 exports.updateSalesAmount = async (req, res) => {
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.body.id,
+    const updatedProduct = await Product.updateMany(
+      {_id:{$in : req.body.id}},
       {
         $inc:{
           salesAmount :  1,
