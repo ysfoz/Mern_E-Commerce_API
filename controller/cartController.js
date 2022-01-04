@@ -83,7 +83,7 @@ exports.deleteProductfromCart = async(req,res)=>{
 
 exports.getCart = async (req, res) => {
   try {
-    const cart = await Cart.findOne({ userId: req.params.userId });
+    const cart = await Cart.findOne({ userId: req.params.id });
     res.status(200).json(cart);
   } catch (error) {
     res.status(500).json(error);
