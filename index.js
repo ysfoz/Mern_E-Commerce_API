@@ -27,6 +27,8 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout",stripeRoute);
 
-app.listen(process.env.PORT || 5001, () => {
-  console.log("server is running");
+const PORT = process.env.PORT || 8081
+
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`);
 });
